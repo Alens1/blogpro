@@ -1,0 +1,235 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UserInfo</title>
+    <style type="text/css">
+        .Content-Main{
+            max-width: 1200px;
+            margin: auto;
+            border: none;
+            border-radius: 15px; 
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+            text-shadow: 1px 1px 1px #444;
+            color: #D3D3D3;
+            background: #555;
+        }
+        .Content-Main h1{
+            padding: 8px 0px 40px 10px;
+            display: block;
+            border-bottom: 1px solid #444;
+        }
+        .text1{
+            margin-left: 3px;
+        }
+        .Content-Main label{
+            margin: 0px 0px 5px;
+            display: block;
+        }
+        .fileInputContainer{
+            height: 99px;
+            width: 99px;
+            margin: 20px 20px 20px 20px ;
+            border: none;
+            background: url("img/Example.jpg");
+            overflow: hidden; 
+            position: relative; 
+        }
+        .fileInput{
+            height: 106px;
+            border: none;
+            font-size: 300px;
+            opacity: 0;  
+            filter:alpha(opacity=0);
+            cursor: pointer;
+            position: absolute;
+        }
+        .Content-Main label>span{
+            width: 20%;
+            float: left;
+            text-align: right;
+            padding-right: 10px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .Main-sex{
+            padding-right: 13px;
+            padding-bottom: 13px;
+            font-weight: bold;
+            line-height: 4px; 
+        }
+        .Main-sex input[type=checkbox]{
+            margin-top:6px;
+            vertical-align:middle; 
+        }
+        .Content-Main input[type="text"],.Content-Main input[type="email"],.Content-Main textarea{
+            height: 25px;
+            width: 70%;
+            line-height: 15px;
+            padding: 5px 0px 5px 5px; 
+            margin-bottom: 16px;
+            margin-right: 6px;
+            margin-top: 2px;
+            border: none;
+            border-radius:2px;
+            -webkit-border-radius:2px;
+            -moz-border-radius:2px;
+            outline: 0 none; 
+            background:  #DFDFDF;
+            color: #525252;
+        }
+        .Content-Main textarea{
+            height: 100px;
+            width: 70%;
+            padding: 5px 0px 0px 5px;
+        }
+        .Content-Main .button{
+            padding: 8px 24px 8px 24px;
+            margin-bottom: 8px;
+            border: none;
+            border-radius: 4px;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px #FFE477;
+            box-shadow: 1px 1px 1px  #3D3D3D;
+            -moz-box-shadow: 1px 1px 1px  #3D3D3D;
+            -webkit-box-shadow: 1px 1px 1px  #3D3D3D;
+            color: #585858;
+            background: #f6ff0a;
+        }
+        .Content-Main .button:hover{
+            color:  #333;
+            background-color:  #EBEBEB ;
+        }
+    </style>
+</head>
+<body>
+        <div class="Content-Main">
+            <form class='form-userInfo' action="/profile_edit/" method="post" enctype="multipart/form-data">
+           {% csrf_token %}
+
+                <h1>个人信息</h1>
+                <span class="text1">请在文本框中完善您的个人信息：</span>
+                <p>
+                <div class="fileInputContainer">
+                    头像：<input  type="file" name="avatar" required id="id_avatar"></span>
+                </div>
+
+
+
+
+
+
+
+
+                <label>
+                    <span>Your username:</span>
+                    <input type="text" name="username" value="{{ request.session.user_name }}" maxlength="128" required id="id_username">
+                </label>
+                <!-- <label class="Main-sex">
+                    <span>Your sex:</span>
+                    <input type="checkbox" class="man">男
+                    <input type="checkbox" class="women">女
+                </label> -->
+                <label>
+                    <span>Your phone:</span>
+                    <input type="text" name="phone" value="{{ request.session.user_phone }}"> 
+                </label>
+                <label>
+                    <span>Your birthday:</span>
+                    <input type="date" value="{{ request.session.user_birth }}" name="birth" required id="id_birth">
+                </label>
+                <label>
+                    <span>Your school:</span>
+                    <input type="text" name="school" value="{{ request.session.user_school }}" maxlength="100" required id="id_school">
+                </label>
+                <label>
+                    <span>Your address:</span>
+                    <input type="text" name="address" value="{{ request.session.user_address }}" maxlength="100" required id="id_address">
+                </label>
+                <label>
+                    <span>About yourself::</span>
+                     <input type="text" name="about" value="{{ request.session.user_about }}" maxlength="100" required id="id_about">
+                </label>
+
+                <label>
+                      <input type="submit" value="确认" class="button" >
+                </label>
+            </form>
+        </div>
+</body
+
+<script src="{% static 'blog/js/jquery-2.1.3.min.js' %}"></script>
+
+    
+<script>
+          $(function () {
+                              bindAvatar();
+     });
+          function bindAvatar() {
+                              if(window.URL.createObjectURL){
+                                        bindAvatar3();
+                              }else if(window.FileReader){
+                                        bindAvatar2();
+                              }else {
+                                        bindAvatar1();
+                              }
+     }
+     
+          /*Ajax上传至后台并返回图片的url*/
+          function bindAvatar1() {
+                    $("#avatarSlect").change(function () {
+                    var csrf = $("input[name='csrfmiddlewaretoken']").val();
+                    var formData=new FormData();
+                    formData.append("csrfmiddlewaretoken",csrf);
+                    formData.append('avatar', $("#avatarSlect")[0].files[0]);      /*获取上传的图片对象*/
+                    $.ajax({
+                              url: '/upload_avatar/',
+                                                  type: 'POST',
+                                                  data: formData,
+                                                  contentType: false,
+                                                  processData: false,
+                                                  success: function (args) {
+                                        console.log(args);      /*服务器端的图片地址*/
+                                                                      $("#avatarPreview").attr('src','/'+args);      /*预览图片*/
+                                                                      $("#avatar").val('/'+args);      /*将服务端的图片url赋值给form表单的隐藏input标签*/
+                         }
+                              })
+     })
+          }
+          /*window.FileReader本地预览*/
+          function bindAvatar2() {
+                    console.log(2);
+                                   $("#avatarSlect").change(function () {
+                                                       var obj=$("#avatarSlect")[0].files[0];
+                                                       var fr=new FileReader();
+                                                       fr.onload=function () {
+                                                                           $("#avatarPreview").attr('src',this.result);
+                                                                           console.log(this.result);
+                                                                           $("#avatar").val(this.result);
+                              };
+                              fr.readAsDataURL(obj);
+                    })
+     }
+     /*window.URL.createObjectURL本地预览*/
+     function bindAvatar3() {
+               console.log(3);
+                              $("#avatarSlect").change(function () {
+                                                  var obj=$("#avatarSlect")[0].files[0];
+                                                  var wuc=window.URL.createObjectURL(obj);
+                                                       $("#avatarPreview").attr('src',wuc);
+                                                       $("#avatar").val(wuc);
+{#                                                   $("#avatarUrl").load(function () {#}                /*当图片加载后释放内存空间，但在jQuery3.2.1中会报错。浏览器关闭后也会自动释放*/
+{#                                                                       window.URL.revokeObjectURL(wuc);#}
+{#                          })#}
+               })
+     }
+     
+</script>
+
+
+</html>

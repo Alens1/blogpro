@@ -1,0 +1,58 @@
+{% load static %}
+    <div class="row text-center">
+    <h1>我的资料</h1>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-3 text-right">
+                <span>用户名：{{ request.session.user_name }}</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 text-right">
+                <span>出生日期：{{ request.session.user_birth }}</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 text-right">
+                <span>联系方式：{{ request.session.user_phone }}</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 text-right">
+                <span>邮箱：{{ request.session.user_email }}</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 text-right">
+                <span>学校：{{ request.session.user_school }}</span>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-3 text-right">
+                <span>地址：{{ request.session.user_address }}</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 text-right">
+                <span>简介：{{ request.session.user_about }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <p>我的头像  <img width="8%" height="8%" src="/media/avatars/{{ request.session.user_avatar }}" alt="头像显示异常"></p>
+    </div>
+    </div>
+    <div class="">
+        <a href="/profile_edit/">编辑</a>
+        <a href="{% url 'blog:index' %}">回到主页</a>
+
+    </div>

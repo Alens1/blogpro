@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+
+<html lang="en-us" >
+<head>
+<title>Change post</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+<link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css">
+
+
+<script type="text/javascript" src="/admin/jsi18n/"></script>
+<script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+<script type="text/javascript" src="/static/admin/js/core.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="/static/admin/js/actions.js"></script>
+<script type="text/javascript" src="/static/admin/js/urlify.js"></script>
+<script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
+<script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+<body class=" app-blog model-post change-form" data-admin-utc-offset="28800">
+    <!-- Container -->
+    <div id="container">
+            <!-- Header -->
+            <div id="header">
+                <div id="branding">
+                     <h1 id="site-name"><a href="">发表文章</a></h1>
+                </div>
+
+                <div id="user-tools">
+                        Welcome
+                        <strong>{{ request.session.user_name }}</strong>.
+                </div>
+            </div>
+            <!-- END Header -->
+
+        <div class="breadcrumbs">
+        <a href="/index/">返回</a>
+        </div>
+            <!-- Content -->
+            <div id="content" class="colM">
+
+                <div id="content-main">
+
+
+        <form action="" method="post" id="post_form"  enctype="multipart/form-data" novalidate><input type="hidden" name="csrfmiddlewaretoken" value="cbtP9xbRyzgJPwbhLWrQ7Obx1kXnSPUgIdyHbnJdk84IujfQq0BHkAmWCss8Q31z">
+            <div>
+
+              <fieldset class="module aligned ">
+
+                    <div class="form-row field-title">
+                            <div>
+                                    <label class="required" for="id_title">标题:</label>
+                                    <input type="text" name="title" value="" class="vTextField" maxlength="70" required id="id_title">
+                            </div>
+                    </div>
+                    <div class="form-row field-body">
+                            <div>
+                                <td><label class="required" for="id_body">正文:</label></td>
+                                    <ul>
+                                         <td><textarea name="body" cols="40" rows="10" class="vLargeTextField" required id="id_body"></textarea></td>
+                                    </ul>
+
+                            </div>
+                    </div>
+
+                    <div class="form-row field-excerpt">
+                         <td ><span style="font-size: large">上传图片<input type="file" name="picture" required id="id_picture"></span> </td>
+
+                    </div>
+
+                    <div class="form-row field-category">
+
+                            <div>
+
+                                    <label class="required" for="id_category">分类:</label>
+
+                                        <div class="related-widget-wrapper">
+                <select name="category" required id="id_category">
+                    <option value="">---------</option>
+                    <option value="4" selected>game</option>
+                    <option value="5">study</option>
+                    <option value="6">trip</option>
+                    <option value="7">pet</option>
+                    <option value="8">other</option>
+                </select>
+
+            </div>
+
+                            </div>
+
+                    </div>
+                    <div class="form-row field-tags">
+
+                            <div>
+                                    <label for="id_tags">标签:</label>
+
+                                        <div class="related-widget-wrapper">
+                <select name="tags" id="id_tags" multiple>
+                      <option value="12" selected>王者荣耀</option>
+
+                      <option value="13">刺激战场</option>
+
+                      <option value="14">修狗</option>
+
+                      <option value="15">修猫</option>
+
+                      <option value="16">三亚</option>
+
+
+
+            </select>
+
+
+            </div>
+
+
+
+                                    <div class="help">Hold down "Control", or "Command" on a Mac, to select more than one.</div>
+
+                            </div>
+
+                    </div>
+
+            </fieldset>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="submit-row">
+
+            <input type="submit" value="Save" class="default" name="_save">
+
+
+
+
+
+
+            </div>
+
+
+
+                <script type="text/javascript"
+                        id="django-admin-form-add-constants"
+                        src="/static/admin/js/change_form.js"
+                        >
+                </script>
+
+            <script type="text/javascript"
+                    id="django-admin-prepopulated-fields-constants"
+                    src="/static/admin/js/prepopulate_init.js"
+                    data-prepopulated-fields="[]">
+            </script>
+
+            </div>
+
+        </form>
+
+            </div>
+
+                <br class="clear">
+            </div>
+            <!-- END Content -->
+
+            <div id="footer"></div>
+    </div>
+    <!-- END Container -->
+</body>
+</html>
